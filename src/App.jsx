@@ -5,17 +5,25 @@ function App() {
     const API_KEY = '74d15b84'
     const [film, setFilm] = useState('')
     const [search, setSearch] = useState('')
+    const [loading, setLoading] = useState(false)
 
     async function fetchFilm() {
+        setLoading(true)
         try {
             const response_data = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${search}`)
             const data = await response_data.json()
 
+            if (data.Response === "False") {
+                throw new Error(data.Error);
+            }
+
             setFilm(data)
-            console.log(data)
         }
         catch (error) {
-            alert('Error occurred!' + error.message)
+            alert('Error occurred! ' + error.message)
+        }
+        finally {
+            setLoading(false)
         }
     }
 
@@ -25,6 +33,12 @@ function App() {
                 <input type={'text'} onChange={(e) => setSearch(e.target.value)} value={search} />
                 <button onClick={fetchFilm}>Search</button>
             </div>
+
+            {loading && (
+                <div className={'loading-container'}>
+                    <h1>Loading...</h1>
+                </div>
+            )}
 
             {film && (
                 <div className={'film-container'}>
