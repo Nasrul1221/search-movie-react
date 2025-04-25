@@ -7,11 +7,16 @@ function App() {
     const [search, setSearch] = useState('')
 
     async function fetchFilm() {
-        const response_data = await fetch(`http://www.omdbapi.com/?apikey=${API_KEY}&t=${search}`)
-        const data = await response_data.json()
+        try {
+            const response_data = await fetch(`https://www.omdbapi.com/?apikey=${API_KEY}&t=${search}`)
+            const data = await response_data.json()
 
-        setFilm(data)
-        console.log(data)
+            setFilm(data)
+            console.log(data)
+        }
+        catch (error) {
+            alert('Error occurred!' + error.message)
+        }
     }
 
     return (
