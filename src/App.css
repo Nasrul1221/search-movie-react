@@ -88,10 +88,6 @@
     gap: .7em;
 }
 
-.film-info span {
-    font-weight: bold;
-}
-
 @media (max-width: 700px) {
     .film-container {
         flex-direction: column;

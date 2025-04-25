@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
+import Paragraph from "./paragraph/Paragraph.jsx";
 
 function App() {
     const API_KEY = '74d15b84'
@@ -24,6 +25,7 @@ function App() {
         }
         finally {
             setLoading(false)
+            setSearch('')
         }
     }
 
@@ -46,18 +48,18 @@ function App() {
                         <h1>{film.Title}</h1>
                         <img src={film.Poster} alt={film.Title} />
                         <div className={'film-left-info-container'}>
-                            <p className={'film-info'}>IMBd rating: {film.imdbRating}</p>
-                            <p className={'film-info'}>Votes: {film.imdbVotes}</p>
+                            <Paragraph text={'IMDb rating'} data={film.imdbRating} />
+                            <Paragraph text={'Votes'} data={film.imdbVotes} />
                         </div>
                     </div>
                     <div className={'film-right'}>
-                        <p className={'film-info'}><span>Year:</span> {film.Year}</p>
-                        <p className={'film-info'}><span>Released:</span> {film.Released}</p>
-                        <p className={'film-info'}><span>Country:</span> {film.Country}</p>
-                        <p className={'film-info'}><span>Genre:</span> {film.Genre}</p>
-                        <p className={'film-info'}><span>Writer:</span> {film.Writer}</p>
+                        <Paragraph text={'Year'} data={film.Year}/>
+                        <Paragraph text={'Released'} data={film.Released}/>
+                        <Paragraph text={'Country'} data={film.Country}/>
+                        <Paragraph text={'Genre'} data={film.Genre}/>
+                        <Paragraph text={'Writer'} data={film.Writer}/>
                         <div className={'plot-container'}>
-                            <p className={'plot'}>{film.Plot}</p>
+                            <Paragraph data={film.Plot} />
                         </div>
                     </div>
                 </div>
